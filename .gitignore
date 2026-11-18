@@ -1,0 +1,9 @@
+.DS_Store
+build.py.bak
+Claude outputs/
+assets/img/logo-original-*.png
+assets/img/hero1.jpg
+assets/img/hero2.jpg
+assets/img/*-orig.jpg
+assets/img/logo.ai
+assets/img/alt-mountain*.jpg
