@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # 사용법: 아래 COMPANY 만 바꾸고  python3 build.py  를 실행하면 모든 페이지에 반영됩니다.
 import os
+TITLE_NAME = "청운투자그룹"   # 브라우저 탭 제목에 쓰는 이름
 COMPANY = "청운"             # <- 회사명은 여기 한 곳만 수정
 LEGAL = "주식회사 청운파트너스"
 ADDRESS = "서울 영등포구 영등포로 150 (당산1가) 생각공장 당산 B동 13F"
@@ -50,7 +51,7 @@ Copyright &copy; All Rights Reserved.
 </body>
 </html>
 '''
-def fill(s): return s.replace('{LEGAL}', LEGAL).replace('{ADDR}', ADDRESS).replace('{C}', C).replace('{PHONE}', PHONE)
+def fill(s): return s.replace('{LEGAL}', LEGAL).replace('{ADDR}', ADDRESS).replace('{C}', C).replace('{PHONE}', PHONE).replace('{TN}', TITLE_NAME)
 def sub(en, img): return '<div class="subhero" style="background-image:linear-gradient(rgba(15,42,71,.62),rgba(15,42,71,.62)),url(assets/img/%s)"><div class="wrap"><h1>%s</h1></div></div>\n' % (img, en)
 def tabs(items): return '<div class="wrap"><nav class="tabs" aria-label="하위 메뉴">'+''.join('<a href="#%s">%s</a>'%i for i in items)+'</nav></div>\n'
 def board(n=0):
@@ -66,7 +67,7 @@ POPUP = '''<div class="pop" id="pop" role="dialog" aria-modal="true" aria-labell
 <div class="acts"><button type="button" id="hide">오늘 하루 보지 않기</button><button type="button" class="ok" id="ok">확인했습니다</button></div></div></div>'''
 
 # ---- 메인
-page('index.html', '{C}', '''<div class="hero"><div class="slides"><div class="on" style="background-image:url(assets/img/hero-sky1.jpg)"></div><div style="background-image:url(assets/img/hero-sky2.jpg)"></div><div style="background-image:url(assets/img/hero-mountain1.jpg)"></div><div style="background-image:url(assets/img/hero-mountain2.jpg)"></div></div><div class="overlay"></div><button class="arrow prev" type="button" aria-label="이전 배너">&#8249;</button><button class="arrow next" type="button" aria-label="다음 배너">&#8250;</button>
+page('index.html', '{TN}', '''<div class="hero"><div class="slides"><div class="on" style="background-image:url(assets/img/hero-sky1.jpg)"></div><div style="background-image:url(assets/img/hero-sky2.jpg)"></div><div style="background-image:url(assets/img/hero-mountain1.jpg)"></div><div style="background-image:url(assets/img/hero-mountain2.jpg)"></div></div><div class="overlay"></div><button class="arrow prev" type="button" aria-label="이전 배너">&#8249;</button><button class="arrow next" type="button" aria-label="다음 배너">&#8250;</button>
 <div class="wrap"><h1>“{C} — 더 높은 푸른 하늘.”</h1><p>새로운 가능성이 피어오르는 곳,<br>높은 뜻을 품고 더 넓은 하늘로 나아가는 투자사</p></div></div>
 <section class="biz"><div class="wrap"><h2 class="big-title"><span>OUR</span> BUSINESS</h2>
 <p class="lead">고객분들의 뜻이 한곳에 모여 광장이라는 한공간에서<br>혁신적인 발전으로 미래를 지향하겠습니다.</p>
@@ -86,7 +87,7 @@ page('index.html', '{C}', '''<div class="hero"><div class="slides"><div class="o
 ''', POPUP if SHOW_POPUP else '')
 
 # ---- 회사소개
-page('about.html', '회사소개 - {C}', sub('ABOUT US', 'banner-about.jpg') + tabs([('greeting','대표 인사말'),('overview','회사개요'),('location','오시는 길')]) + '''
+page('about.html', '회사소개 - {TN}', sub('ABOUT US', 'banner-about.jpg') + tabs([('greeting','대표 인사말'),('overview','회사개요'),('location','오시는 길')]) + '''
 <section><div class="wrap">
 <div class="panel" id="greeting"><h2 class="title">대표 인사말</h2><div class="greet">
 <div class="photo has-img" role="img" aria-label="인사말 이미지" style="background-image:url(assets/img/greeting.jpg)">이미지</div>
@@ -110,10 +111,10 @@ page('about.html', '회사소개 - {C}', sub('ABOUT US', 'banner-about.jpg') + t
 items = ["시장 리서치 및 분석 콘텐츠 제공","국내외 금융시장 관련 정보 및 트렌드 콘텐츠 제공","다양한 관점의 시황 리포트 및 분석 자료 발행","일반 투자 정보 콘텐츠 제공","투자 참고용 정보 및 뉴스 큐레이션","금융시장에 대한 시각을 나누는 콘텐츠 제작","온라인 커뮤니티 운영","다양한 투자자들의 의견이 공유되는 열린 커뮤니티 제공","자유로운 토론과 정보 교류의 장 마련","데이터 기반 정보 콘텐츠 제공","시장 지표, 차트 등 정량적 데이터 콘텐츠 제공","사용자 이해를 돕는 시각화 자료 제작","금융·투자 인식 제고 프로그램","초보자를 위한 기초 정보 콘텐츠 운영","합리적 투자 판단에 도움이 되는 정보 제공"]
 icons = ["person-chalkboard","clipboard-list","file-lines","user-group","sliders","bars-progress","message","comments","users","envelope-open-text","chart-line","desktop","lightbulb","pen-to-square","share-nodes"]
 cells = ''.join('<div><i class="fa-solid fa-%s" aria-hidden="true"></i><small>BUSINESS %02d</small><p>%s</p></div>' % (icons[i], i+1, t) for i, t in enumerate(items))
-page('business.html', '사업분야 - {C}', sub('BUSINESS', 'banner-business.jpg') + '<section><div class="wrap"><h2 class="title">사업분야</h2><div class="grid5">' + cells + '</div></div></section>\n')
+page('business.html', '사업분야 - {TN}', sub('BUSINESS', 'banner-business.jpg') + '<section><div class="wrap"><h2 class="title">사업분야</h2><div class="grid5">' + cells + '</div></div></section>\n')
 
 # ---- 서비스 안내 (등급 이미지에 글자가 포함되어 있음)
-page('service.html', '서비스 안내 - {C}', sub('SERVICE', 'banner-service.jpg') + '''<section><div class="wrap"><h2 class="title">서비스 안내</h2>
+page('service.html', '서비스 안내 - {TN}', sub('SERVICE', 'banner-service.jpg') + '''<section><div class="wrap"><h2 class="title">서비스 안내</h2>
 <h3 class="sec-label">상품소개</h3><div class="tiers">
 <div class="tc"><img src="assets/img/tier-1.png" alt="실버 등급"></div><div class="tc"><img src="assets/img/tier-2.png" alt="골드 등급"></div><div class="tc"><img src="assets/img/tier-3.png" alt="플래티넘 등급"></div></div></div></section>
 ''')
@@ -127,8 +128,8 @@ cards = ''.join('<div class="expert"><div class="avatar has-img" role="img" aria
 page('experts.html', '{C} 전문가', sub('SERVICE', 'banner-experts.jpg') + '<section><div class="wrap"><div class="eyebrow">EXPERTS</div><h2 class="title">{C} 전문가</h2><div class="experts">' + cards + '</div></div></section>\n')
 
 # ---- 고객후기 / 커뮤니티
-page('reviews.html', '고객후기 - {C}', sub('REVIEWS', 'banner-reviews.jpg') + '<section><div class="wrap"><h2 class="title">고객후기</h2>' + board(0) + '<a class="write" href="#">글쓰기</a></div></section>\n')
-page('notice.html', '커뮤니티 - {C}', sub('COMMUNITY', 'banner-notice.jpg') + tabs([('notice','공지사항'),('press','보도자료')]) + '''<section><div class="wrap">
+page('reviews.html', '고객후기 - {TN}', sub('REVIEWS', 'banner-reviews.jpg') + '<section><div class="wrap"><h2 class="title">고객후기</h2>' + board(0) + '<a class="write" href="#">글쓰기</a></div></section>\n')
+page('notice.html', '커뮤니티 - {TN}', sub('COMMUNITY', 'banner-notice.jpg') + tabs([('notice','공지사항'),('press','보도자료')]) + '''<section><div class="wrap">
 <div class="panel" id="notice"><h2 class="title">공지사항</h2>''' + board(0) + '''</div>
 <div class="panel" id="press"><h2 class="title">보도자료</h2>''' + board(0) + '''</div></div></section>
 ''')
