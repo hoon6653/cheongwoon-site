@@ -7,6 +7,7 @@ LEGAL = "주식회사 청운파트너스"
 ADDRESS = "서울 영등포구 영등포로 150 (당산1가) 생각공장 당산 B동 13F"
 SHOW_POPUP = False           # 팝업을 쓰려면 True
 PHONE   = "02-786-1005"
+SITE_URL = "https://hoon6653.github.io/cheongwoon-site/"   # 도메인 연결 후 https://도메인/ 로 변경
 OUT = os.path.dirname(os.path.abspath(__file__))
 C = COMPANY
 
@@ -16,7 +17,17 @@ HEAD = '''<!DOCTYPE html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>@TITLE@</title>
-<meta name="description" content="{C}">
+<meta name="description" content="@DESC@">
+<link rel="canonical" href="@URL@">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="{TN}">
+<meta property="og:title" content="@TITLE@">
+<meta property="og:description" content="@DESC@">
+<meta property="og:url" content="@URL@">
+<meta property="og:image" content="@IMG@">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;800&family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -58,8 +69,22 @@ def board(n=0):
     rows = '<tr><td colspan="5">등록된 글이 없습니다.</td></tr>' if n == 0 else ''
     return ('<div class="board-top"><span>전체 %d</span></div><table><thead><tr><th>번호</th><th>제목</th><th>작성자</th><th>작성일</th><th>조회</th></tr></thead><tbody>%s</tbody></table>'
             '<form class="search"><select aria-label="검색 범위"><option>제목</option><option>내용</option></select><input type="search" aria-label="검색어"><button>검색</button></form>') % (n, rows)
+DESCS = {
+ 'index.html': '청운투자그룹 - 데이터 기반 시장 분석과 합리적인 투자 관점을 제공하는 투자사. 사업분야, 서비스 안내, 청운 전문가를 소개합니다.',
+ 'about.html': '청운투자그룹 회사소개. 대표 인사말, 회사개요, 오시는 길을 안내합니다.',
+ 'business.html': '청운투자그룹의 사업분야. 투자 교육, 시장 분석, 투자 전략 컨설팅 등 주요 사업을 소개합니다.',
+ 'service.html': '청운투자그룹 서비스 안내. 등급별 서비스 구성과 이용 방법을 안내합니다.',
+ 'experts.html': '청운투자그룹 전문가. 투자 전략과 시장 분석을 이끄는 전문가진을 소개합니다.',
+ 'reviews.html': '청운투자그룹 고객후기. 고객이 남긴 이야기를 확인하세요.',
+ 'notice.html': '청운투자그룹 커뮤니티. 공지사항과 보도자료를 확인하세요.',
+}
+PAGES = []
 def page(name, title, body, extra=''):
-    html = HEAD.replace('@TITLE@', title) + body + FOOT.replace('@EXTRA@', extra)
+    PAGES.append(name)
+    url = SITE_URL + ('' if name == 'index.html' else name)
+    head = (HEAD.replace('@DESC@', DESCS.get(name, TITLE_NAME)).replace('@URL@', url)
+                .replace('@IMG@', SITE_URL + 'assets/img/hero-sky1.jpg').replace('@TITLE@', title))
+    html = head + body + FOOT.replace('@EXTRA@', extra)
     open(os.path.join(OUT, name), 'w', encoding='utf-8').write(fill(html))
 
 POPUP = '''<div class="pop" id="pop" role="dialog" aria-modal="true" aria-labelledby="pt"><div class="box">
@@ -134,3 +159,10 @@ page('notice.html', '커뮤니티 - {TN}', sub('COMMUNITY', 'banner-notice.jpg')
 <div class="panel" id="press"><h2 class="title">보도자료</h2>''' + board(0) + '''</div></div></section>
 ''')
 print("완료:", COMPANY)
+
+# ---- sitemap.xml / robots.txt
+import datetime
+today = datetime.date.today().isoformat()
+urls = ''.join('<url><loc>%s</loc><lastmod>%s</lastmod></url>\n' % (SITE_URL + ('' if n == 'index.html' else n), today) for n in PAGES)
+open(os.path.join(OUT, 'sitemap.xml'), 'w', encoding='utf-8').write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + urls + '</urlset>\n')
+open(os.path.join(OUT, 'robots.txt'), 'w', encoding='utf-8').write('User-agent: *\nAllow: /\n\nSitemap: ' + SITE_URL + 'sitemap.xml\n')
