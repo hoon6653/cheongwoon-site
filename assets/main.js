@@ -46,6 +46,7 @@
     if(saved!==today)pop.classList.add('on');
     var close=function(){pop.classList.remove('on');};
     d.getElementById('ok').onclick=close;
+    d.getElementById('xbtn').onclick=close;
     d.getElementById('hide').onclick=function(){try{localStorage.setItem(key,today);}catch(e){}close();};
     d.addEventListener('keydown',function(e){if(e.key==='Escape')close();});
   }

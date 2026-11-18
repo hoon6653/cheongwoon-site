@@ -5,7 +5,7 @@ TITLE_NAME = "청운투자그룹"   # 브라우저 탭 제목에 쓰는 이름
 COMPANY = "청운"             # <- 회사명은 여기 한 곳만 수정
 LEGAL = "주식회사 청운파트너스"
 ADDRESS = "서울 영등포구 영등포로 150 (당산1가) 생각공장 당산 B동 13F"
-SHOW_POPUP = False           # 팝업을 쓰려면 True
+SHOW_POPUP = True            # 사칭 주의 팝업 (끄려면 False)
 PHONE   = "02-786-1005"
 SITE_URL = "https://hoon6653.github.io/cheongwoon-site/"   # 도메인 연결 후 https://도메인/ 로 변경
 OUT = os.path.dirname(os.path.abspath(__file__))
@@ -88,8 +88,13 @@ def page(name, title, body, extra=''):
     open(os.path.join(OUT, name), 'w', encoding='utf-8').write(fill(html))
 
 POPUP = '''<div class="pop" id="pop" role="dialog" aria-modal="true" aria-labelledby="pt"><div class="box">
-<h2 id="pt">{C} 사칭 사기에 주의하세요</h2><p>[방문자에게 알릴 안내 문구를 적어 주세요.]</p>
-<div class="acts"><button type="button" id="hide">오늘 하루 보지 않기</button><button type="button" class="ok" id="ok">확인했습니다</button></div></div></div>'''
+<button type="button" class="pop-x" id="xbtn" aria-label="닫기"></button>
+<span class="pop-chip">&#9888; 사칭 주의 안내</span>
+<h2 id="pt">{TN} 사칭 사기에 주의하세요</h2>
+<p>전문가의 실명·사진·경력을 도용해 고수익을 미끼로 접근하는 보이스피싱이 확산되고 있습니다.</p>
+<div class="pop-warn">{TN}은 해외선물·지수 거래 리딩을 일절 진행하지 않습니다.</div>
+<p>회사와 무관한 연락이나 투자 제안을 받으셨다면 응답하지 마시고 즉시 차단해 주세요. 관련 사칭 행위는 증거 수집 후 수사기관·법률 자문과 함께 대응 중입니다.</p>
+<div class="acts"><button type="button" class="hide" id="hide">오늘 하루 보지 않기</button><button type="button" class="ok" id="ok">확인했습니다</button></div></div></div>'''
 
 # ---- 메인
 page('index.html', '{TN}', '''<div class="hero"><div class="slides"><div class="on" style="background-image:url(assets/img/hero-sky1.jpg)"></div><div style="background-image:url(assets/img/hero-sky2.jpg)"></div><div style="background-image:url(assets/img/hero-mountain1.jpg)"></div><div style="background-image:url(assets/img/hero-mountain2.jpg)"></div></div><div class="overlay"></div><button class="arrow prev" type="button" aria-label="이전 배너">&#8249;</button><button class="arrow next" type="button" aria-label="다음 배너">&#8250;</button>

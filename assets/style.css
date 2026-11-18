@@ -246,3 +246,17 @@ td{font-weight:700}th{font-weight:700;background:#f9f9f9}
 .plus::before,.plus::after{content:"";position:absolute;left:50%;top:50%;background:#fff;transform:translate(-50%,-50%)}
 .plus::before{width:24px;height:1.5px}.plus::after{width:1.5px;height:24px}
 @media (max-width:860px){.big-title{font-size:36px}}
+
+/* ---- v9: 사칭 주의 팝업 ---- */
+.pop{background:rgba(0,0,0,.72)}
+.pop .box{position:relative;max-width:640px;padding:44px 36px 28px;border-radius:0;max-height:92vh;overflow:auto}
+.pop-x{position:absolute;top:22px;right:24px;width:28px;height:28px;border:0;background:none;cursor:pointer}
+.pop-x::before,.pop-x::after{content:"";position:absolute;left:50%;top:50%;width:20px;height:2px;background:#111}
+.pop-x::before{transform:translate(-50%,-50%) rotate(45deg)}.pop-x::after{transform:translate(-50%,-50%) rotate(-45deg)}
+.pop-chip{display:inline-block;background:#f8ecdf;color:#8a5a10;font-size:14px;font-weight:500;padding:9px 16px;border-radius:999px;margin-bottom:18px}
+.pop .box h2{font-family:var(--sans);font-size:24px;font-weight:700;color:#111;line-height:1.4;margin-bottom:12px;word-break:keep-all}
+.pop .box p{font-size:15px;line-height:1.7;color:#555;word-break:keep-all;margin-bottom:14px}
+.pop-warn{background:#f8ecdf;color:#8a5a10;font-weight:600;font-size:16px;line-height:1.6;padding:18px 20px;border-radius:12px;margin:0 0 16px;word-break:keep-all}
+.pop .acts{align-items:center;border-top:1px solid #e5e5e5;margin-top:10px;padding-top:18px}
+.pop .acts .hide{border:0;background:none;color:#888;font-size:14px;padding:8px 0}
+.pop .acts .ok{background:#2d5ba6;border-color:#2d5ba6;color:#fff;border-radius:10px;padding:14px 36px;font-size:16px;font-weight:600}
