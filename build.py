@@ -7,7 +7,7 @@ LEGAL = "주식회사 청운파트너스"
 ADDRESS = "서울 영등포구 영등포로 150 (당산1가) 생각공장 당산 B동 13F"
 SHOW_POPUP = True            # 사칭 주의 팝업 (끄려면 False)
 PHONE   = "02-786-1005"
-SITE_URL = "https://hoon6653.github.io/cheongwoon-site/"   # 도메인 연결 후 https://도메인/ 로 변경
+SITE_URL = "https://cheongunpns.com/"   # 도메인 연결 후 https://도메인/ 로 변경
 OUT = os.path.dirname(os.path.abspath(__file__))
 C = COMPANY
 

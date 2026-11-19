@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://hoon6653.github.io/cheongwoon-site/sitemap.xml
+Sitemap: https://cheongunpns.com/sitemap.xml
