@@ -100,7 +100,7 @@ POPUP = '''<div class="pop" id="pop" role="dialog" aria-modal="true" aria-labell
 <div class="acts"><button type="button" class="hide" id="hide">오늘 하루 보지 않기</button><button type="button" class="ok" id="ok">확인했습니다</button></div></div></div>'''
 
 # ---- 메인
-page('index.html', '{TN}', '''<div class="hero"><div class="slides"><div class="on" style="background-image:url(assets/img/hero-sky1.jpg)"></div><div style="background-image:url(assets/img/hero-sky2.jpg)"></div><div style="background-image:url(assets/img/hero-mountain1.jpg)"></div><div style="background-image:url(assets/img/hero-mountain2.jpg)"></div></div><div class="overlay"></div><button class="arrow prev" type="button" aria-label="이전 배너">&#8249;</button><button class="arrow next" type="button" aria-label="다음 배너">&#8250;</button>
+page('index.html', '{TN}', '''<div class="hero"><div class="slides"><div class="on" style="background-image:url(assets/img/hero-sky1.jpg)"></div><div style="background-image:url(assets/img/hero-sky2.jpg)"></div><div style="background-image:url(assets/img/hero-mountain2.jpg)"></div></div><div class="overlay"></div><button class="arrow prev" type="button" aria-label="이전 배너">&#8249;</button><button class="arrow next" type="button" aria-label="다음 배너">&#8250;</button>
 <div class="wrap"><h1>“{C} — 더 높은 푸른 하늘.”</h1><p>새로운 가능성이 피어오르는 곳,<br>높은 뜻을 품고 더 넓은 하늘로 나아가는 투자사</p></div></div>
 <section class="biz"><div class="wrap"><h2 class="big-title"><span>OUR</span> BUSINESS</h2>
 <p class="lead">고객분들의 뜻이 한곳에 모여 광장이라는 한공간에서<br>혁신적인 발전으로 미래를 지향하겠습니다.</p>
